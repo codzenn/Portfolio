@@ -102,15 +102,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} bg-slate-950 antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} bg-[#11110f] antialiased`}>
         <a
           href="#content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-cyan-300 focus:px-4 focus:py-2 focus:text-slate-950"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-[#d9ff4a] focus:px-4 focus:py-2 focus:text-[#171813]"
         >
           Skip to content
         </a>
         <div className="relative min-h-screen overflow-x-hidden">
-          <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.08),transparent_28%),radial-gradient(circle_at_top_right,rgba(139,92,246,0.12),transparent_35%),linear-gradient(180deg,#020617_0%,#020617_45%,#030712_100%)]" />
           <Navbar />
           <div id="content">{children}</div>
           <Footer />

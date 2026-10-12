@@ -48,6 +48,24 @@ export type EngineeringHighlight = {
     icon: LucideIcon;
 };
 
+export type SupportingProject = {
+    title: string;
+    subtitle: string;
+    description: string;
+    githubUrl: string;
+    liveDemoUrl: string;
+    stack: string[];
+    workflow: string[];
+    highlights: string[];
+};
+
+export type BlogPost = {
+    title: string;
+    publishedAt: string;
+    readTime: string;
+    href: string;
+};
+
 export type SkillCategory = {
     title: string;
     items: string[];
@@ -74,13 +92,12 @@ export const siteConfig = {
     linkedinProfile: 'https://linkedin.com/in/kpeeyush',
 } as const;
 
-export const resumeFilePath = '/Peeyush_Kumar_SDE_Resume.pdf';
-
 export const navigationLinks = [
     { label: 'About', href: '/#about' },
     { label: 'Project', href: '/#project' },
     { label: 'Skills', href: '/#skills' },
     { label: 'Experience', href: '/#experience' },
+    { label: 'Writing', href: '/#writing' },
     { label: 'Contact', href: '/#contact' },
 ];
 
@@ -88,11 +105,6 @@ export const socialLinks: SocialLink[] = [
     { label: 'GitHub', href: siteConfig.githubProfile, icon: Github },
     { label: 'LinkedIn', href: siteConfig.linkedinProfile, icon: Linkedin },
 ];
-
-export const heroCtas = [
-    { label: 'View Project', href: '/#project', variant: 'primary' },
-    { label: 'Download Resume', href: resumeFilePath, variant: 'secondary', download: true },
-] as const;
 
 export const aboutBlurb =
     'I build modern full-stack products that combine strong frontend execution, scalable backend services, and reliable production delivery. My experience spans React.js, Next.js, TypeScript, Node.js, Spring Boot, PostgreSQL, cloud infrastructure, secure authentication flows, and AI-assisted workflows, with a focus on turning complex requirements into clean, usable product experiences.';
@@ -225,6 +237,43 @@ export const featuredProject = {
     ] satisfies EngineeringHighlight[],
 };
 
+export const autoDevProject: SupportingProject = {
+    title: 'AutoDev',
+    subtitle: 'Repository Intelligence Platform',
+    description:
+        'A repository-scoped RAG workspace that lets developers ask grounded technical questions about their own GitHub codebases and review streamed answers with file-level citations.',
+    githubUrl: 'https://github.com/codzenn/AutoDev',
+    liveDemoUrl: 'https://frontend-production-2604.up.railway.app',
+    stack: ['Next.js 16', 'React 19', 'TypeScript', 'Spring Boot 4', 'Java 21', 'PostgreSQL', 'pgvector', 'Spring AI'],
+    workflow: ['GitHub OAuth', 'Repository sync', 'Async indexing', 'Vector retrieval', 'Cited answers'],
+    highlights: [
+        'Repository ownership checks and a repo-scoped vector filter isolate every user query.',
+        'Source files are chunked, embedded, and indexed asynchronously without blocking the request that starts indexing.',
+        'Spring MVC streams OpenAI responses over SSE while persistent chat sessions retain citation metadata.',
+    ],
+};
+
+export const blogPosts: BlogPost[] = [
+    {
+        title: "Understanding the Thundering Herd Problem: Flipkart's Big Billion Days Sale",
+        publishedAt: 'Oct 12, 2026',
+        readTime: '15 min read',
+        href: 'https://theengineeringlab.hashnode.dev/thundering-herd-problem-cache-stampede',
+    },
+    {
+        title: 'Working and Architecture of GPT',
+        publishedAt: 'Sep 29, 2026',
+        readTime: '3 min read',
+        href: 'https://theengineeringlab.hashnode.dev/working-and-architecture-of-gpt',
+    },
+    {
+        title: 'Machine Learning Engineer vs Applied AI Engineer: The Smart Robot Analogy',
+        publishedAt: 'Sep 29, 2026',
+        readTime: '2 min read',
+        href: 'https://theengineeringlab.hashnode.dev/machine-learning-engineer-vs-applied-ai-engineer-the-smart-robot-analogy',
+    },
+];
+
 export const skillCategories: SkillCategory[] = [
     {
         title: 'Frontend',
@@ -255,9 +304,9 @@ export const experienceItems: ExperienceItem[] = [
     {
         role: 'Java Web Developer',
         company: 'Aspire Software · Full-time · Remote',
-        duration: 'Oct 2023 - Present',
+        duration: 'Oct 2023 - May 2026',
         achievements: [
-            'Working as a Java Developer on a multi-tenant enterprise vehicle logistics platform used by automotive OEMs for vehicle tracking, holds, rates, invoices, EDI workflows, and reporting.',
+            'Built full-stack capabilities for a multi-tenant enterprise vehicle logistics platform used by automotive OEMs for vehicle tracking, holds, rates, invoices, EDI workflows, and reporting.',
             'Built and maintained backend services using Java, Spring Boot, Hibernate, REST APIs, reusable business logic, validation, and centralized error handling.',
             'Developed full-stack application screens and workflows using React.js, JavaScript, and Java services integrated with Oracle-backed business processes.',
             'Worked on secure application flows using OAuth2, JWT, SAML SSO, RBAC, report-level authorization, and secure API integration patterns.',
@@ -282,6 +331,6 @@ export const footerLinks = [
     { label: 'About', href: '/#about' },
     { label: 'Project', href: '/#project' },
     { label: 'Experience', href: '/#experience' },
-    { label: 'Download Resume', href: resumeFilePath, download: true },
+    { label: 'Writing', href: '/#writing' },
     { label: 'Contact', href: '/#contact' },
 ];

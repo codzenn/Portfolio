@@ -1,105 +1,54 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import { useState } from "react";
 import { navigationLinks, siteConfig } from "@/lib/data";
 
 export function Navbar() {
-  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
-
   return (
-    <header className="sticky top-0 z-50 px-4 pt-5 sm:px-6 lg:px-8">
-      <motion.div
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55, ease: "easeOut" }}
-        className="mx-auto max-w-6xl"
-      >
-        <div className="relative flex items-center justify-between gap-4 px-1 py-3">
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/14 to-transparent" />
-          <div className="pointer-events-none absolute left-1/2 top-0 h-16 w-72 -translate-x-1/2 rounded-full bg-cyan-400/10 blur-3xl ambient-float" />
-          <div className="pointer-events-none absolute right-10 top-0 h-14 w-28 rounded-full bg-violet-500/8 blur-3xl ambient-float" />
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#11110f]/90 backdrop-blur-xl">
+      <div className="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between px-5 sm:px-8 lg:px-12">
+        <Link href="#top" className="group flex items-center gap-3" aria-label="Go to portfolio home">
+          <span className="grid h-9 w-9 place-items-center rounded-full border border-[#d9ff4a]/70 font-mono text-xs font-bold text-[#d9ff4a] transition group-hover:rotate-12">PK</span>
+          <span className="hidden text-sm font-medium tracking-[-.02em] text-[#f5f4ef] sm:block">{siteConfig.name}</span>
+        </Link>
 
-          <Link
-            href="/"
-            className="relative inline-flex items-center rounded-full px-2 py-2 text-sm font-semibold text-white transition hover:text-cyan-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
-            aria-label="Go to portfolio home"
-          >
-            <span className="text-slate-200">{siteConfig.name}</span>
+        <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary navigation">
+          {navigationLinks.map((link) => (
+            <Link key={link.label} href={link.href} className="nav-link font-mono text-[11px] uppercase tracking-[0.14em] text-[#9c9b92]">
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="hidden lg:block">
+          <Link href="#contact" className="inline-flex items-center gap-2 rounded-full bg-[#d9ff4a] px-4 py-2.5 text-xs font-semibold text-[#161713] hover:-translate-y-0.5 hover:bg-[#efffae]">
+            Let&apos;s talk <ArrowUpRight className="h-3.5 w-3.5" />
           </Link>
-
-          <nav
-            className="relative hidden items-center gap-1 overflow-hidden rounded-full bg-white/[0.035] px-2 py-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_14px_40px_rgba(2,6,23,0.16)] backdrop-blur-xl md:flex"
-            aria-label="Primary navigation"
-          >
-            <span className="light-sweep pointer-events-none absolute left-0 top-0 h-px w-24 bg-gradient-to-r from-transparent via-cyan-300/90 to-transparent" />
-            {navigationLinks.map((link) => {
-              return (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="group relative rounded-full px-4 py-2 text-sm text-slate-300 transition hover:bg-white/[0.06] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
-                >
-                  {link.label}
-                  <span className="absolute inset-x-4 bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-cyan-300 to-violet-400 transition duration-300 group-hover:scale-x-100" />
-                </Link>
-              );
-            })}
-          </nav>
-
-          <button
-            type="button"
-            className="relative inline-flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white/[0.045] text-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_10px_30px_rgba(2,6,23,0.2)] transition hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 md:hidden"
-            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={isOpen}
-            onClick={() => setIsOpen((open) => !open)}
-          >
-            <span className="pointer-events-none absolute inset-x-2 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent" />
-            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
         </div>
-      </motion.div>
 
-      <AnimatePresence>
-        {isOpen ? (
-          <motion.div
-            initial={{ opacity: 0, x: 32 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 24 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-slate-950/70 px-4 py-24 backdrop-blur-xl md:hidden"
-          >
-            <div className="relative mx-auto flex max-w-sm flex-col gap-3 overflow-hidden rounded-[2.2rem] bg-[linear-gradient(180deg,rgba(8,15,30,0.92),rgba(2,6,23,0.86))] p-6 shadow-[0_30px_90px_rgba(2,6,23,0.45)]">
-              <div className="pointer-events-none absolute left-0 top-0 h-px w-28 bg-gradient-to-r from-transparent via-cyan-300/90 to-transparent light-sweep" />
-              <div className="pointer-events-none absolute -right-10 top-8 h-24 w-24 rounded-full bg-violet-500/12 blur-3xl" />
-              {navigationLinks.map((link, index) => (
-                <motion.div
-                  key={link.label}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.06 }}
-                >
-                  <Link
-                    href={link.href}
-                    className="flex items-center justify-between rounded-2xl bg-white/[0.04] px-4 py-4 text-base font-medium text-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition hover:bg-white/[0.08] hover:text-white"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+        <button type="button" className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-[#f5f4ef] lg:hidden" aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={isOpen} onClick={() => setIsOpen((open) => !open)}>
+          {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+      </div>
+
+      {isOpen ? (
+        <nav className="border-t border-white/10 bg-[#11110f] px-5 py-5 lg:hidden" aria-label="Mobile navigation">
+          <div className="mx-auto flex max-w-[1400px] flex-col">
+            {navigationLinks.map((link) => (
+              <Link key={link.label} href={link.href} onClick={() => setIsOpen(false)} className="border-b border-white/10 py-4 font-mono text-xs uppercase tracking-[0.16em] text-[#cfcec5]">
+                {link.label}
+              </Link>
+            ))}
+            <Link href="#contact" onClick={() => setIsOpen(false)} className="mt-5 inline-flex w-fit items-center gap-2 rounded-full bg-[#d9ff4a] px-4 py-2.5 text-xs font-semibold text-[#161713]">
+              Let&apos;s talk <ArrowUpRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+        </nav>
+      ) : null}
     </header>
   );
 }
