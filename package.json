@@ -23,13 +23,8 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-<<<<<<< HEAD
-    "eslint-config-next": "14.2.35",
-    "postcss": "^8.5.23",
-=======
     "eslint-config-next": "15.5.27",
     "postcss": "^8.5.29",
->>>>>>> bb0f308 (chore: update next and eslint-config-next to version 15.5.27, and adjust postcss version)
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
